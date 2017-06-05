@@ -26,7 +26,7 @@
     </div>
     <div class="index-right">
       <!--轮播图-->
-      <slide-show :slides="slides" :inv="slideSpeed" @onchange="onchangeSlideIndex(index)"></slide-show>
+      <slide-show :slides="slides" :inv="slideSpeed" @onchange="onchangeSlideIndex"></slide-show>
       <!--立即购买-->
       <div class="index-board-list">
         <div
@@ -49,8 +49,8 @@
   import slideShow from '../components/slideShow.vue'
   export default{
     methods : {
-      onchangeSlideIndex () {
-          console.log('change');
+      onchangeSlideIndex (index) {
+          console.log('change' + index);
       }
     },
     created () { //生命周期 组件插件完毕时候

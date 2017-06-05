@@ -37,7 +37,7 @@
         return {
           currentIndex : 3,
           isShow: true
-      }
+        }
       },
     computed: {
       prevIndex () {
@@ -63,7 +63,7 @@
             setTimeout(() => {
               this.isShow = true
               this.currentIndex = index
-              this.$emit('onchange',index)
+              this.$emit('onchange',this.currentIndex)
             }, 10)
           },
           //定时器
@@ -73,7 +73,7 @@
               },this.inv)
           },
           clearInv () {
-              clearInterval(this.invId)
+            clearInterval(this.invId)
           }
       },
       mounted () {  //自动执行methods
