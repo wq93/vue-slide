@@ -6,10 +6,14 @@
 
         <div class="head-nav">
           <ul class="nav-list">
-            <li @click = 'loginClick'>登录</li>
-            <li class="nav-pile">|</li>
-            <li @click = 'registerClick'>注册</li>
-            <li class="nav-pile">|</li>
+            <li v-if="username !== ''">{{ username }} , 欢迎您!</li>
+            <li v-if="username !== ''" class="nav-pile">|</li>
+            <li v-if="username !== ''" @click = 'outClick'>退出</li>
+            <li v-if="username !== ''" class="nav-pile">|</li>
+            <li v-if="username === ''" @click = 'loginClick'>登录</li>
+            <li v-if="username === ''" class="nav-pile">|</li>
+            <li v-if="username === ''" @click = 'registerClick'>注册</li>
+            <li v-if="username === ''" class="nav-pile">|</li>
             <li @click = 'aboutClick'>关于</li>
           </ul>
         </div>
@@ -24,21 +28,27 @@
       <p>© 2016 fishenal MIT</p>
     </div>
     <my-dialog :isShow = "isShowAboutDialog" @on-close = 'closeDialog("isShowAboutDialog")'>
-      <p>other hello</p>
+      <p>
+        我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于我是关于
+      </p>
+    </my-dialog>
+    <my-dialog :isShow = "isShowOutDialog" @on-close = 'closeDialog("isShowOutDialog")'>
+      <out-form></out-form>
     </my-dialog>
     <my-dialog :isShow = "isShowLogDialog" @on-close = 'closeDialog("isShowLogDialog")'>
-      <p>log hello</p>
+      <log-form @has-log="logInfo"></log-form>
     </my-dialog>
     <my-dialog :isShow = "isShowRegDialog" @on-close = 'closeDialog("isShowRegDialog")'>
-      <p>reg hello</p>
+      <reg-form></reg-form>
     </my-dialog>
   </div>
 </template>
 
 <script>
 import Dialog from './base/dialog'
-import LogForm from './logForm'
+import LogForm from './logForm' //引入组件
 import RegForm from './regForm'
+import OutForm from './outForm'
 export default {
   components: {
     MyDialog: Dialog,
@@ -50,6 +60,7 @@ export default {
       isShowAboutDialog: false,
       isShowLogDialog: false,
       isShowRegDialog: false,
+      isShowOutDialog: false,
       username: ''
     }
   },
@@ -57,8 +68,12 @@ export default {
     aboutClick () {
       this.isShowAboutDialog  =  true
     },
+    outClick(){
+      this.isShowOutDialog  =  true
+    },
     loginClick () {
       this.isShowLogDialog  =  true
+      this.username = "";
     },
     registerClick () {
       this.isShowRegDialog  =  true
@@ -66,6 +81,10 @@ export default {
 
     closeDialog(attr){ //通过子组件传递过来的
       this[attr]  =  false;
+    },
+    logInfo(data) { //通过子组件传递过来的 (登录成功显示用户名)
+      this.username = data.username;
+      this.closeDialog('isShowLogDialog'); //关闭登录框
     }
   }
 }

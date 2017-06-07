@@ -68,9 +68,9 @@
           },
           //定时器
           runInv () {
-              this.invId = setInterval(() =>{
+              /*this.invId = setInterval(() =>{
                   this.goto(this.nextIndex)
-              },this.inv)
+              },this.inv)*/
           },
           clearInv () {
             clearInterval(this.invId)

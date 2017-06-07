@@ -54,14 +54,13 @@
       }
     },
     created () { //生命周期 组件插件完毕时候
-      this.$http.post('api/getBoardList',{
+      this.$http.post('api/getNewsList',{
           'user' : 'wangqi',
           'age' : 24
       })
       .then((data) =>{
-        console.log(data);
         //可以把返回值赋值
-        //this.newsList = data.data;
+        this.newsList = data.data;
       },(err) =>{
         console.log(err);
       })
@@ -95,18 +94,7 @@
           }
         ],
         newsList: [
-          {
-            title: '最新消息-1',
-          },
-          {
-            title: '最新消息-2',
-          },
-          {
-            title: '最新消息-3',
-          },
-          {
-            title: '最新消息-4',
-          }
+
         ],
         productList: {
           pc: {
